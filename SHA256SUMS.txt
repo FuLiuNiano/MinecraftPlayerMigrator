@@ -1,0 +1,2 @@
+7f9c6dc0241840aa9a628520b8b7ee4bf12f38e4880b746a5d980d5ea5d2f850  MinecraftPlayerMigrator-v1.1.0-win-x64.zip
+9952550b41514f04df0bae7438db492a7c9efe8d90dfa19c2d5a4228e1cd8948  MinecraftPlayerMigrator.exe

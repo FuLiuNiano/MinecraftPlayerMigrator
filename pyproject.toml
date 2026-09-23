@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "minecraft-player-migrator"
+version = "1.1.0"
+description = "Safely migrate a Minecraft Java player between a server world and a local single-player world."
+requires-python = ">=3.12"
+dependencies = [
+    "nbtlib==1.12.1",
+    "psutil==6.1.1",
+    "PySide6==6.11.2",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8,<9",
+    "ruff>=0.6,<1",
+    "pyinstaller==6.22.3",
+    "pillow==11.3.0",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+markers = [
+    "real_data: tests that read an explicitly supplied real ZIP or isolated world",
+]
+
+[tool.setuptools.packages.find]
+include = ["core*", "ui*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"

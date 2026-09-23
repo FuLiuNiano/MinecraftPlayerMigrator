@@ -1,0 +1,27 @@
+Third-party notices for Minecraft Player Migrator v1.1.0
+
+This release bundles or depends on the following open-source projects. Their
+upstream license terms remain applicable to those projects.
+
+nbtlib 1.12.1
+License: MIT
+Project: https://github.com/twoolie/NBT
+
+psutil
+License: BSD-3-Clause
+Project: https://github.com/giampaolo/psutil
+
+PySide6 / Qt for Python
+License: LGPL-3.0-only (and Qt licensing terms)
+Project: https://doc.qt.io/qtforpython/
+
+PyInstaller
+License: GPL-2.0-or-later with bootloader exception
+Project: https://github.com/pyinstaller/pyinstaller
+
+Pillow (build-time icon generation)
+License: HPND
+Project: https://python-pillow.org/
+
+The complete license texts are available from the corresponding upstream
+projects and package metadata included in the development environment.
