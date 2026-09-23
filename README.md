@@ -2,15 +2,32 @@
 
 Minecraft 人物迁移工具是一个 Windows 优先的 Minecraft Java 版 Player NBT 迁移工具。它适合把服务器 ZIP 或 world 文件夹中的人物，迁移到隔离的本地单人 world。
 
+## 正式发布与下载
+
+当前版本：Minecraft Player Migrator v1.1.0
+
+状态：
+
+- Minecraft Player Migrator v1.1.0 Release Verified
+- Full Player Progress Migration = End-to-End Game Verified
+- GUI Migration Flow = Real-World End-to-End Verified
+
+Windows 下载：GitHub Releases -> `v1.1.0`
+
+发布包：`MinecraftPlayerMigrator-v1.1.0-win-x64.zip`
+
+请完整解压 ZIP 后运行，不能只复制 `MinecraftPlayerMigrator.exe`。
+
 ## 普通用户使用
 
 1. 关闭 Minecraft、PCL2/HMCL/Prism 等启动器和 Java 游戏进程。
-2. 启动 `MinecraftPlayerMigrator.exe`。
-3. 第一步选择服务器 world/ZIP、本地目标 world；也可以直接拖入路径。
-4. 扫描后选择人物，检查用户名、UUID、背包、装备、等级、坐标、ForgeCaps 和 Curios。
-5. 确认本地 UUID 证据、迁移预览和备份空间后开始迁移。
-6. 程序会先创建完整 world 备份，再同步 `playerdata/<目标 UUID>.dat` 和 `level.dat -> Data -> Player`。
-7. 看到成功校验后，再启动 Minecraft 测试目标 world。
+2. 下载并完整解压 `MinecraftPlayerMigrator-v1.1.0-win-x64.zip`。
+3. 启动 `MinecraftPlayerMigrator.exe`。
+4. 选择服务器 world/ZIP，并选择服务器中的玩家。
+5. 选择本地目标 world。
+6. 确认服务器与本地 Minecraft Java 版本一致，并查看兼容性报告。
+7. 点击开始迁移；程序会先创建完整 world 备份。
+8. 迁移完成并通过校验后，再进入 Minecraft 检查目标 world。
 
 目标 world 写入前必须退出游戏。程序不会上传存档，也不会执行 ZIP 中的程序。
 
@@ -20,7 +37,9 @@ v1.1 GUI 使用五步流程：来源扫描、服务器人物、目标 world 与�
 
 迁移按钮只调用核心层的 `build_full_plan()` 和 `execute_full_migration()`。GUI 不直接写 NBT、UUID、备份或任务文件。ForgeCaps、Curios/Accessories 等属于完整 Player NBT，随人物整体迁移，不作为会丢失数据的白名单字段。
 
-正常模式包含 Player、advancements、stats；FTB Quests、FTB Teams、Waystones、Ending Library、Cosmetic Armor 属于实验模块，只有扫描为可验证时才默认启用，否则明确跳过并显示原因。当前已针对 Forge 1.20.1 隔离测试环境完成核心与事务闭环验证；其他版本必须先经过只读兼容性检查和隔离测试。
+正常模式包含 Player、Advancements、Stats；FTB Quests、FTB Teams、Waystones、Ending Library、Cosmetic Armor 属于实验性模组扩展，只有扫描为可验证时才默认启用，否则明确跳过并显示原因。完整实机验证环境为 Minecraft Java 1.20.1、Forge、Windows x64；迁移流程已完成真实端到端验证。其他版本必须先经过只读兼容性检查和隔离测试。
+
+服务器世界与本地世界必须使用相同的 Minecraft Java 版本。本项目支持 Minecraft Java 同版本迁移，当前不支持跨版本转换。
 
 ## 当前迁移范围
 
@@ -44,19 +63,19 @@ v1.1 GUI 使用五步流程：来源扫描、服务器人物、目标 world 与�
 
 高级模式可以查看 NBT 来源、UUID 证据、背包和 capability 摘要。身份或版本证据冲突时必须修正路径或存档，GUI 不提供绕过安全阻断的强制迁移按钮。NBTExplorer 只是可选的人工作品查看工具，不是本程序依赖；请只从可信来源安装。
 
-## 开发测试
+## 开发与验证
 
 ```powershell
 .venv\Scripts\python.exe -m pytest -v
 .venv\Scripts\python.exe -m ruff check .
 ```
 
-开发阶段不使用正式 Minecraft world 做自动测试；GUI smoke test 使用 offscreen Qt。发布前请在隔离副本中完成真实游戏加载、保存和退出后的只读复检。
+自动测试只使用隔离测试数据，不使用正式 Minecraft world；GUI smoke test 使用 offscreen Qt。v1.1.0 已完成核心、完整玩家进度、GUI 实机加载保存闭环和发布包验证。
 
 ## 发布包
 
-`dist\\MinecraftPlayerMigrator\\` 是 Windows x64 one-folder 发布目录，包含程序及第三方依赖，不需要用户安装 Python 或项目 `.venv`。v1.1 GUI 完成后再单独执行打包验收；当前开发阶段不自动覆盖旧发布包。
+`dist\\MinecraftPlayerMigrator\\` 是构建生成的 Windows x64 one-folder 目录，包含程序及第三方依赖；正式用户只需下载 GitHub Release 中的 ZIP，不需要安装 Python 或项目 `.venv`。
 
-请完整解压发布 ZIP 后运行，不能只复制 `MinecraftPlayerMigrator.exe`。程序完全在本地处理，不上传任何存档。
+程序完全在本地处理，不上传任何存档或 UUID。
 
-核心状态：V1 Core Verified；v1.1.0 发布候选包已完成 onedir、三种 Windows 路径和无 Python 环境自检。正式存档仍建议先创建额外备份并在隔离副本上验证。
+正式状态：Minecraft Player Migrator v1.1.0 Release Verified；Full Player Progress Migration = End-to-End Game Verified；GUI Migration Flow = Real-World End-to-End Verified。正式存档仍建议先创建额外备份并在隔离副本上验证。
